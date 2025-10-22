@@ -41,7 +41,7 @@ const Navbar = () => {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <Link to="/" className="flex-shrink-0">
-            <h1 className="text-2xl font-bold text-blue-600">ToyCars</h1>
+            <h1 className="text-3xl font-bold text-red-400">Khelna Gari</h1>
           </Link>
 
           {/* Navigation Links */}
