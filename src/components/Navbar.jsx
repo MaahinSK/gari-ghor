@@ -1,37 +1,79 @@
-import React from 'react'
-import { Link, NavLink, useNavigate } from 'react-router-dom'
-import { useAuth } from '../providers/AuthProvider'
-import { Helmet } from 'react-helmet-async'
-import { FaUserCircle } from 'react-icons/fa'
+import React, { useContext, useState } from "react";
+import { NavLink, useNavigate } from "react-router";
+import { AuthContext } from "../providers/AuthProvider";
+import { toast } from "react-toastify";
 
-export default function Navbar() {
-  const { user, logout, loading } = useAuth()
-  const navigate = useNavigate()
+const Navbar = () => {
+  const { user, logout } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const [showTooltip, setShowTooltip] = useState(false);
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+      toast.success("Logged out successfully");
+      navigate("/");
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
+
+  const navLinks = (
+    <>
+      <NavLink to="/" className={({ isActive }) => (isActive ? "text-blue-600 font-bold" : "")}>
+        Home
+      </NavLink>
+      <NavLink to="/profile" className={({ isActive }) => (isActive ? "text-blue-600 font-bold" : "")}>
+        My Profile
+      </NavLink>
+    </>
+  );
 
   return (
-    <header className="bg-white shadow">
-      <div className="container mx-auto px-4 py-3 flex items-center justify-between">
-        <Helmet>
-          <title>Toy Car Store</title>
-        </Helmet>
-        <Link to="/" className="text-xl font-bold">ToyCar<span className="text-indigo-600">Shop</span></Link>
-        <nav className="flex items-center gap-4">
-          <NavLink to="/" end className={({isActive})=>isActive? 'text-indigo-600 font-semibold':'hover:text-indigo-600'}>Home</NavLink>
-          <NavLink to="/profile" className={({isActive})=>isActive? 'text-indigo-600 font-semibold':'hover:text-indigo-600'}>My Profile</NavLink>
-          {loading ? (
-            <div>Loading...</div>
-          ) : user ? (
-            <div className="flex items-center gap-3">
-              <div title={user.displayName} className="w-9 h-9 rounded-full overflow-hidden">
-                {user.photoURL ? <img src={user.photoURL} alt="user" /> : <FaUserCircle size={36} />}
-              </div>
-              <button onClick={() => { logout(); navigate('/') }} className="btn">Logout</button>
+    <nav className="bg-gray-800 text-white shadow-md">
+      <div className="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+        <h1
+          className="text-2xl font-bold cursor-pointer"
+          onClick={() => navigate("/")}
+        >
+          ToyCarHub
+        </h1>
+        <div className="flex gap-5 items-center">
+          {navLinks}
+
+          {user ? (
+            <div className="relative flex items-center gap-3">
+              <img
+                src={user.photoURL || "https://i.ibb.co/MBtjqXQ/no-image.png"}
+                alt="User"
+                className="w-10 h-10 rounded-full cursor-pointer border-2 border-blue-500"
+                onMouseEnter={() => setShowTooltip(true)}
+                onMouseLeave={() => setShowTooltip(false)}
+              />
+              {showTooltip && (
+                <div className="absolute top-12 bg-gray-700 text-white px-3 py-1 rounded text-sm">
+                  {user.displayName || "User"}
+                </div>
+              )}
+              <button
+                onClick={handleLogout}
+                className="bg-red-600 px-3 py-1 rounded hover:bg-red-700"
+              >
+                Logout
+              </button>
             </div>
           ) : (
-            <Link to="/login" className="btn">Login</Link>
+            <button
+              onClick={() => navigate("/login")}
+              className="bg-blue-600 px-3 py-1 rounded hover:bg-blue-700"
+            >
+              Login
+            </button>
           )}
-        </nav>
+        </div>
       </div>
-    </header>
-  )
-}
+    </nav>
+  );
+};
+
+export default Navbar;

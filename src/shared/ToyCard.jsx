@@ -1,20 +1,28 @@
-import React from 'react'
-import { useNavigate } from 'react-router-dom'
+import React from "react";
+import { useNavigate } from "react-router";
 
-export default function ToyCard({ toy }){
-  const navigate = useNavigate()
-
-  const viewMore = () => {
-    navigate(`/toy/${toy.toyId}`)
-  }
-
+const ToyCard = ({ toy }) => {
+  const navigate = useNavigate();
   return (
-    <div className="bg-white rounded shadow p-4">
-      <img src={toy.pictureURL} alt={toy.toyName} className="w-full h-40 object-contain" />
-      <h3 className="font-semibold mt-2">{toy.toyName}</h3>
-      <div className="text-sm">Rating: {toy.rating} | Qty: {toy.availableQuantity}</div>
-      <div className="text-lg font-bold mt-2">${toy.price}</div>
-      <button onClick={viewMore} className="btn mt-3">View More</button>
+    <div className="bg-white shadow-lg rounded-2xl overflow-hidden hover:shadow-xl transition-all">
+      <img
+        src={toy.image}
+        alt={toy.name}
+        className="h-48 w-full object-cover cursor-pointer"
+        onClick={() => navigate(`/toy/${toy.id}`)}
+      />
+      <div className="p-4 text-center">
+        <h3 className="text-xl font-semibold">{toy.name}</h3>
+        <p className="text-gray-500">Price: ${toy.price}</p>
+        <button
+          onClick={() => navigate(`/toy/${toy.id}`)}
+          className="mt-3 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+        >
+          View Details
+        </button>
+      </div>
     </div>
-  )
-}
+  );
+};
+
+export default ToyCard;
