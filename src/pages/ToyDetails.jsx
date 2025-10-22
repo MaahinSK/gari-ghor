@@ -1,42 +1,167 @@
-import React, { useEffect, useState } from "react";
-import { useParams, Link } from "react-router";
+import React, { useState, useEffect } from 'react';
+import { Helmet } from 'react-helmet-async';
+import { useParams, Navigate } from 'react-router';
+import { useAuth } from '../hooks/useAuth';
+import { FaStar, FaShoppingBag } from 'react-icons/fa';
+import { toast } from 'react-toastify';
 
 const ToyDetails = () => {
   const { id } = useParams();
+  const { user } = useAuth();
   const [toy, setToy] = useState(null);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: ''
+  });
 
   useEffect(() => {
-    fetch("/toys.json")
-      .then((res) => res.json())
-      .then((data) => setToy(data.find((t) => t.id === parseInt(id))))
-      .catch((err) => console.error(err));
+    fetch('/toys.json')
+      .then(res => res.json())
+      .then(data => {
+        const foundToy = data.find(t => t.toyId === parseInt(id));
+        setToy(foundToy);
+      });
   }, [id]);
 
-  if (!toy)
+  const handleInputChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    toast.success('Toy trial request submitted successfully! We will contact you soon.');
+    setFormData({ name: '', email: '' });
+  };
+
+  if (!user) {
+    return <Navigate to="/login" replace />;
+  }
+
+  if (!toy) {
     return (
-      <div className="flex justify-center items-center h-[80vh]">
-        <p>Loading...</p>
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600"></div>
       </div>
     );
+  }
 
   return (
-    <div className="max-w-3xl mx-auto px-4 py-10">
-      <div className="bg-white shadow-xl rounded-2xl overflow-hidden">
-        <img src={toy.image} alt={toy.name} className="w-full h-80 object-cover" />
-        <div className="p-6 space-y-3">
-          <h2 className="text-3xl font-bold">{toy.name}</h2>
-          <p className="text-gray-500">{toy.description}</p>
-          <p className="font-semibold">Category: {toy.category}</p>
-          <p className="text-blue-600 text-lg font-bold">Price: ${toy.price}</p>
-          <Link
-            to="/seller-details"
-            className="mt-4 inline-block bg-blue-600 text-white px-5 py-2 rounded hover:bg-blue-700"
-          >
-            View Seller Info
-          </Link>
+    <>
+      <Helmet>
+        <title>{toy.toyName} - ToyCars</title>
+      </Helmet>
+
+      <div className="min-h-screen bg-gray-50 py-8">
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {/* Toy Image and Details */}
+            <div className="bg-white rounded-lg shadow-md p-6">
+              <img 
+                src={toy.pictureURL} 
+                alt={toy.toyName}
+                className="w-full h-96 object-contain mb-6"
+              />
+              
+              <h1 className="text-3xl font-bold mb-4">{toy.toyName}</h1>
+              
+              <div className="grid grid-cols-2 gap-4 mb-6">
+                <div className="bg-gray-50 p-4 rounded-lg">
+                  <p className="text-gray-600">Seller</p>
+                  <p className="font-semibold">{toy.sellerName}</p>
+                </div>
+                <div className="bg-gray-50 p-4 rounded-lg">
+                  <p className="text-gray-600">Price</p>
+                  <p className="text-2xl font-bold text-blue-600">${toy.price}</p>
+                </div>
+                <div className="bg-gray-50 p-4 rounded-lg">
+                  <p className="text-gray-600">Rating</p>
+                  <div className="flex items-center">
+                    <FaStar className="text-yellow-400 mr-1" />
+                    <span className="font-semibold">{toy.rating}</span>
+                  </div>
+                </div>
+                <div className="bg-gray-50 p-4 rounded-lg">
+                  <p className="text-gray-600">Available Quantity</p>
+                  <p className="font-semibold">{toy.availableQuantity}</p>
+                </div>
+              </div>
+
+              <div className="mb-6">
+                <h3 className="text-xl font-semibold mb-2">Description</h3>
+                <p className="text-gray-700">{toy.description}</p>
+              </div>
+
+              <div className="bg-blue-50 p-4 rounded-lg">
+                <h4 className="font-semibold mb-2">Seller Information</h4>
+                <p>Name: {toy.sellerName}</p>
+                <p>Email: {toy.sellerEmail}</p>
+                <p>Category: {toy.subCategory}</p>
+              </div>
+            </div>
+
+            {/* Try Now Form */}
+            <div className="bg-white rounded-lg shadow-md p-6 h-fit sticky top-24">
+              <h2 className="text-2xl font-bold mb-6 flex items-center">
+                <FaShoppingBag className="mr-2" />
+                Try This Toy Now
+              </h2>
+              
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Your Name
+                  </label>
+                  <input
+                    type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleInputChange}
+                    required
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    placeholder="Enter your name"
+                  />
+                </div>
+                
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Your Email
+                  </label>
+                  <input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    required
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    placeholder="Enter your email"
+                  />
+                </div>
+                
+                <button
+                  type="submit"
+                  className="w-full bg-blue-600 text-white py-3 px-4 rounded-md hover:bg-blue-700 transition-colors font-semibold"
+                >
+                  Try Now
+                </button>
+              </form>
+
+              <div className="mt-6 p-4 bg-green-50 rounded-lg">
+                <h4 className="font-semibold text-green-800 mb-2">Why Try Our Toys?</h4>
+                <ul className="text-green-700 text-sm space-y-1">
+                  <li>• Premium quality materials</li>
+                  <li>• Safe for all ages</li>
+                  <li>• Free shipping on trials</li>
+                  <li>• 30-day satisfaction guarantee</li>
+                </ul>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
