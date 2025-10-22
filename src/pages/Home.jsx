@@ -78,7 +78,7 @@ const Home = () => {
       </Helmet>
 
       <div className="min-h-screen bg-gray-50">
-        {/* Hero Slider */}
+        {/* Slider */}
         <section className="mb-12">
           <Swiper
             modules={[Navigation, Pagination, Autoplay]}
@@ -97,7 +97,7 @@ const Home = () => {
                       <img 
                         src={toy.pictureURL} 
                         alt={toy.toyName}
-                        className="h-48 mx-auto mb-4 object-contain"
+                        className="h-60 mx-auto mb-4 object-contain"
                       />
                       <h2 className="text-4xl font-bold mb-2">{toy.toyName}</h2>
                       <p className="text-xl">${toy.price}</p>
@@ -183,12 +183,11 @@ const Home = () => {
                       <div className="flex items-center justify-between">
                         <span className="text-2xl font-bold text-blue-600">${toy.price}</span>
                         <Link
-                          to={`/toy/${toy.toyId}`}
-                          className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors flex items-center"
-                        >
-                          <FaEye className="mr-2" />
-                          View More
-                        </Link>
+                     to={`/toy/${toy.toyId}`}
+                              className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors flex items-center">
+                         <FaEye className="mr-2" />
+                            View More
+                      </Link>
                       </div>
                     </div>
                   </div>

@@ -66,7 +66,7 @@ const Login = () => {
             Or{' '}
             <Link
               to="/register"
-              className="font-medium text-blue-600 hover:text-blue-500"
+              className="text-xl font-bold text-blue-600 hover:text-cyan-400"
             >
               create a new account
             </Link>

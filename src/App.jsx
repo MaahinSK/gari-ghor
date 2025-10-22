@@ -29,7 +29,7 @@ function App() {
       <Router>
         <div className="flex flex-col min-h-screen">
           <Routes>
-            {/* Routes with Navbar and Footer */}
+            {/* Public Routes */}
             <Route path="/" element={
               <>
                 <Navbar />
@@ -58,6 +58,8 @@ function App() {
                 <Footer />
               </>
             } />
+            
+            {/* Protected Routes */}
             <Route path="/toy/:id" element={
               <PrivateRoute>
                 <Navbar />
