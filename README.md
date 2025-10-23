@@ -1,16 +1,23 @@
-# React + Vite
+# khelna gari
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+khelna gari - Premium Toy Car Collection
+A modern e-commerce platform for toy car enthusiasts and collectors. Browse through an extensive collection of premium toy cars, from sports cars to off-road vehicles, all with detailed information and high-quality images.
 
-Currently, two official plugins are available:
+What It Does
+khelna gari provides a seamless shopping experience for toy car lovers:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Explore Collections: Browse toys by categories like sports cars, off-road vehicles, and sedans
 
-## React Compiler
+Smart Filtering: Filter toys by popularity, category, or view all available options
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Detailed Product Pages: Get comprehensive information about each toy including specifications, seller details, and pricing
 
-## Expanding the ESLint configuration
+User Accounts: Create an account to save preferences and access exclusive features
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Try Before You Buy: Submit trial requests for toys you're interested in
+
+Seller Information: View verified seller profiles with ratings and contact information
+
+The platform features a clean, intuitive interface that makes finding your perfect toy car simple and enjoyable. Whether you're a collector looking for rare models or a parent shopping for gifts, khelna gari offers a premium browsing experience with secure authentication and responsive design that works perfectly on any device.
+
+Discover your next favorite toy car today!
