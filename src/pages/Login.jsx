@@ -51,6 +51,13 @@ const Login = () => {
     }
   };
 
+  // Navigate to forgot password with current email
+  const handleForgotPassword = () => {
+    navigate('/forgot-password', { 
+      state: { email: formData.email } 
+    });
+  };
+
   return (
     <>
       <Helmet>
@@ -66,7 +73,7 @@ const Login = () => {
             Or{' '}
             <Link
               to="/register"
-              className="text-xl font-bold text-blue-600 hover:text-cyan-400"
+              className="font-medium text-blue-600 hover:text-blue-500"
             >
               create a new account
             </Link>
@@ -127,12 +134,13 @@ const Login = () => {
 
               <div className="flex items-center justify-between">
                 <div className="text-sm">
-                  <Link
-                    to="/forgot-password"
+                  <button
+                    type="button"
+                    onClick={handleForgotPassword}
                     className="font-medium text-blue-600 hover:text-blue-500"
                   >
                     Forgot your password?
-                  </Link>
+                  </button>
                 </div>
               </div>
 
