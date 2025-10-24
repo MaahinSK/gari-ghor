@@ -21,3 +21,16 @@ Seller Information: View verified seller profiles with ratings and contact infor
 The platform features a clean, intuitive interface that makes finding your perfect toy car simple and enjoyable. Whether you're a collector looking for rare models or a parent shopping for gifts, khelna gari offers a premium browsing experience with secure authentication and responsive design that works perfectly on any device.
 
 Discover your next favorite toy car today!
+
+packages used 
+"firebase"
+"react"
+"react-dom"
+"react-helmet-async"
+"react-icons"
+"react-router"
+"react-toastify"
+"swiper"
+"tailwindcss"
+
+live link: https://gari-ghor.web.app/
