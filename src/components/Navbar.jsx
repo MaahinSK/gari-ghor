@@ -61,7 +61,7 @@ const Navbar = () => {
           <div className="flex items-center space-x-4">
             {user ? (
               <div className="relative group">
-                {/* User Avatar */}
+                {/*  Avatar */}
                 <div className="flex items-center space-x-2 cursor-pointer">
                   <img
                     src={user.photoURL || '/default-avatar.png'}
@@ -70,7 +70,7 @@ const Navbar = () => {
                   />
                 </div>
 
-                {/* Dropdown on Hover */}
+               
                 <div className="absolute right-0 mt-2 w-56 bg-white rounded-md shadow-lg py-1 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform group-hover:translate-y-0 translate-y-2">
                   {/* User Info */}
                   <div className="px-4 py-3 border-b border-gray-100">

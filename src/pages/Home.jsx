@@ -90,7 +90,7 @@ const Home = () => {
           >
             {sliderToys.map(toy => (
               <SwiperSlide key={toy.toyId}>
-                <div className="relative h-96 bg-gradient-to-r from-blue-600 to-purple-600">
+                <div className="relative h-96 bg-linear-to-r from-blue-600 to-purple-600">
                   <div className="absolute inset-0 bg-black bg-opacity-40"></div>
                   <div className="relative z-10 h-full flex items-center justify-center">
                     <div className="text-center text-white">
@@ -133,7 +133,7 @@ const Home = () => {
           )}
 
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-            {/* Left Sidebar - Categories */}
+            {/* Left Sidebar  */}
             <div className="lg:col-span-1">
               <div className="bg-white p-6 rounded-lg shadow-md sticky top-24">
                 <h3 className="text-xl font-semibold mb-4">Categories</h3>
@@ -156,7 +156,7 @@ const Home = () => {
               </div>
             </div>
 
-            {/* Main Content - Toys Grid */}
+            {/* Main Content  */}
             <div className="lg:col-span-2">
               <h2 className="text-3xl font-bold mb-6">
                 {selectedCategory === 'popular' ? 'Popular Toys' : 
@@ -195,7 +195,7 @@ const Home = () => {
               </div>
             </div>
 
-            {/* Right Sidebar - Top Expensive Toys */}
+            {/* Right Sidebar  */}
             <div className="lg:col-span-1">
               <div className="bg-white p-6 rounded-lg shadow-md sticky top-24">
                 <h3 className="text-xl font-semibold mb-4">Most Expensive</h3>
